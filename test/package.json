@@ -1,13 +1,11 @@
 {
-  "name": "docpad-plugin-grunt-testsite",
+  "name": "docpad-plugin-gulp-testsite",
   "description": "Downloads some of the test dependencies.",
   "version": "2.0.4",
   "private": true,
-  "dependencies": {
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "grunt-cli": "~0.1.10"
+    "gulp": "~3.8.6",
+    "gulp-concat": "^2.3.3"
   }
 }

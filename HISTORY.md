@@ -1,5 +1,8 @@
 ## History
 
+- v2.1.3 July 17th, 2014
+  - Fork to support gulp
+
 - v2.1.2 December 19th, 2013
   - Handles all DocPad events - [@evantill](http://github.com/evantill)
   - Updated documentation

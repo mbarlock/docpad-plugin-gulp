@@ -1,7 +1,7 @@
 LICENSE
 =======
 
-Grunt Plugin for DocPad is released under the MIT License:
+Gulp Plugin for DocPad is released under the MIT License:
 
 > Copyright (C) 2013 [Rob Loach](http://robloach.net)
 >

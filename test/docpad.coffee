@@ -2,10 +2,10 @@
 module.exports = {
   templateData:
     site:
-      title: "Grunt Plugin for DocPad"
+      title: "Gulp Plugin for DocPad"
 
   plugins:
-    # By default, it uses "concat", but we will use "copy" instead.
-    grunt:
-      writeAfter: ["copy"]
+    gulp:
+      writeAfter: false
+      generateAfter: "default"
 }
