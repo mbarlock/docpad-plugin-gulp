@@ -1,5 +1,8 @@
 ## History
 
+- v2.1.4 July 18th, 2014
+  - Remove unnecessary out file
+
 - v2.1.3 July 17th, 2014
   - Fork to support gulp
 
