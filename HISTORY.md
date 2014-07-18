@@ -1,5 +1,9 @@
 ## History
 
+- v2.1.5 July 18th, 2014
+  - Revert back to only run on specific events
+  - Support multiple tasks per event
+
 - v2.1.4 July 18th, 2014
   - Remove unnecessary out file
 

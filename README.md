@@ -30,7 +30,7 @@ The following will run the `"cssmin"` task from gulp during the
   plugins:
     gulp:
       writeAfter: false
-      generateAfter: "cssmin"
+      generateAfter: ["cssmin"]
 ```
 
 

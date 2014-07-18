@@ -9,21 +9,8 @@ module.exports = (BasePlugin) ->
     config:
       writeAfter: []
 
-    createEventHandlers: (docpad) ->
-      for eventName in docpad.getEvents()
-        @[eventName] = (opts, next) =>
-          if tasks = @getConfig()[eventName] or false
-            @processGulp(tasks, opts, next)
-          else
-            return next()
-          @
-      @
-
     # Constructor
     constructor: (opts)->
-      # create eventHandlers
-      {docpad} = opts
-      @createEventHandlers(docpad)
 
       # Prepare
       super
@@ -34,6 +21,62 @@ module.exports = (BasePlugin) ->
       @glob = require('glob')
 
       # Chain
+      @
+
+    writeBefore: (opts, next) ->
+      if tasks = @getConfig().writeBefore or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    writeAfter: (opts, next) ->
+      if tasks = @getConfig().writeAfter or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    renderBefore: (opts, next) ->
+      if tasks = @getConfig().renderBefore or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    renderAfter: (opts, next) ->
+      if tasks = @getConfig().renderAfter or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    generateBefore: (opts, next) ->
+      if tasks = @getConfig().generateBefore or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    generateAfter: (opts, next) ->
+      if tasks = @getConfig().generateAfter or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    populateCollectionsBefore: (opts, next) ->
+      if tasks = @getConfig().populateCollectionsBefore or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
+      @
+
+    populateCollections: (opts, next) ->
+      if tasks = @getConfig().populateCollections or false
+        @processGulp(tasks, opts, next)
+      else
+        return next()
       @
 
     # Process the gulp tasks.

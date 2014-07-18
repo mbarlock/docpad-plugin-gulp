@@ -7,5 +7,5 @@ module.exports = {
   plugins:
     gulp:
       writeAfter: false
-      generateAfter: "default"
+      generateAfter: ["default"]
 }
