@@ -7,10 +7,25 @@ module.exports = (BasePlugin) ->
 
     # Configuration
     config:
+      background: false
       writeAfter: []
+
+    createEventHandlers: (docpad) ->
+      # Retain the local scope to allow manipulation of DocPad events
+      docpad.getEvents().forEach (eventName) =>
+        @[eventName] = (opts, next) =>
+          if tasks = @getConfig()[eventName] or false
+            @processGulp(tasks, opts, next)
+          else
+            return next()
+          @
+      @
 
     # Constructor
     constructor: (opts)->
+      # create eventHandlers
+      {docpad} = opts
+      @createEventHandlers(docpad)
 
       # Prepare
       super
@@ -23,66 +38,12 @@ module.exports = (BasePlugin) ->
       # Chain
       @
 
-    writeBefore: (opts, next) ->
-      if tasks = @getConfig().writeBefore or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    writeAfter: (opts, next) ->
-      if tasks = @getConfig().writeAfter or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    renderBefore: (opts, next) ->
-      if tasks = @getConfig().renderBefore or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    renderAfter: (opts, next) ->
-      if tasks = @getConfig().renderAfter or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    generateBefore: (opts, next) ->
-      if tasks = @getConfig().generateBefore or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    generateAfter: (opts, next) ->
-      if tasks = @getConfig().generateAfter or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    populateCollectionsBefore: (opts, next) ->
-      if tasks = @getConfig().populateCollectionsBefore or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
-    populateCollections: (opts, next) ->
-      if tasks = @getConfig().populateCollections or false
-        @processGulp(tasks, opts, next)
-      else
-        return next()
-      @
-
     # Process the gulp tasks.
     processGulp: (tasks, opts, next) ->
       # Prepare
       rootPath = @docpad.getConfig().rootPath
+
+      console.log(@getConfig());
 
       # Find the gulp path
       files = @glob.sync '**/gulp/bin/gulp.js',
@@ -96,8 +57,11 @@ module.exports = (BasePlugin) ->
         command.push task for task in tasks or []
 
         # Execute
-        @safeps.spawn(command, {cwd: rootPath, output: true}, next)
-
+        if !@getConfig().background
+          @safeps.spawn(command, {cwd: rootPath, output: true}, next)
+        else
+          @safeps.spawn(command, {cwd: rootPath, output: true})
+          next()
       else
         err = new Error('Could not find the gulp command line interface.')
         return next(err); err

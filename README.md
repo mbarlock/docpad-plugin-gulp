@@ -33,6 +33,14 @@ The following will run the `"cssmin"` task from gulp during the
       generateAfter: ["cssmin"]
 ```
 
+To run your task in the background, set the `background` option to true.
+```coffeescript
+  plugins:
+    gulp:
+      background: true
+      writeAfter: []
+```
+
 
 <!-- HISTORY/ -->
 
