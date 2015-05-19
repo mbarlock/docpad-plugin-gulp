@@ -43,8 +43,6 @@ module.exports = (BasePlugin) ->
       # Prepare
       rootPath = @docpad.getConfig().rootPath
 
-      console.log(@getConfig());
-
       # Find the gulp path
       files = @glob.sync '**/gulp/bin/gulp.js',
         cwd: rootPath
