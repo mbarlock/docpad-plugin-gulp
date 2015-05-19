@@ -45,7 +45,6 @@
       GulpPlugin.prototype.processGulp = function(tasks, opts, next) {
         var command, err, files, gulpPath, rootPath, task, _i, _len, _ref;
         rootPath = this.docpad.getConfig().rootPath;
-        console.log(this.getConfig());
         files = this.glob.sync('**/gulp/bin/gulp.js', {
           cwd: rootPath,
           nosort: true
